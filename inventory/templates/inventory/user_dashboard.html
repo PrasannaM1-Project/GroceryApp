@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  {% load static %}
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      background: linear-gradient(135deg, #f0fff0, #ffffff);
+      color: #333;
+    }
+
+    h2 {
+      color: #27ae60;
+      font-size: 28px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .welcome-text {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #555;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .nav-buttons {
+      margin-bottom: 30px;
+    }
+
+    .nav-buttons a {
+      display: inline-block;
+      margin-right: 15px;
+      padding: 12px 24px;
+      background-color: #27ae60;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-buttons a.logout {
+      background-color: #c0392b;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #219150;
+    }
+
+    .nav-buttons a.logout:hover {
+      background-color: #a93226;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    td {
+      background-color: #fdfdfd;
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Welcome, {{ user.username }}!</h2>
+  <p class="welcome-text">Ready to refill your kitchen? Browse the products below and place your order now.</p>
+
+  <div class="nav-buttons">
+    <a href="{% url 'order_create' %}">🛒 Create Order</a>
+    <a href="{% url 'logout' %}" class="logout">🔒 Logout</a>
+  </div>
+
+  <h3>Available Products:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.stock }}</td>
+        <td>₹{{ product.price }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No products available right now. Check back later!</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>

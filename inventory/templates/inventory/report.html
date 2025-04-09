@@ -1,0 +1,93 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .report-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+
+    .report-header {
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
+
+    .report-header h1 {
+        font-size: 2.5rem;
+        color: #343a40;
+        margin: 0;
+    }
+
+    .report-header p {
+        color: #6c757d;
+        margin-top: 5px;
+        font-size: 1rem;
+    }
+
+    .report-metric {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f1f3f5;
+        border-left: 5px solid #0d6efd;
+        border-radius: 8px;
+        transition: 0.3s ease;
+    }
+
+    .report-metric:hover {
+        background-color: #e9ecef;
+    }
+
+    .metric-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .metric-value {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #212529;
+    }
+
+    @media (max-width: 600px) {
+        .report-metric {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .metric-value {
+            margin-top: 8px;
+        }
+    }
+</style>
+
+<div class="report-container">
+    <div class="report-header">
+        <h1>Daily Sales Report</h1>
+        <p>Date: {{ date }}</p>
+    </div>
+
+    <div class="report-metric">
+        <div class="metric-title">Total Orders</div>
+        <div class="metric-value">{{ orders }}</div>
+    </div>
+
+    <div class="report-metric" style="border-left-color: #28a745;">
+        <div class="metric-title">Total Sales</div>
+        <div class="metric-value">₹{{ sales|floatformat:2 }}</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grocery Inventory</title>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'product_list' %}">Products</a> |
+    <!-- <a href="{% url 'order_create' %}">Create Order</a> | -->
+    <a href="{% url 'stock_alerts' %}">Stock Alerts</a> |
+    <a href="{% url 'generate_report' %}">Report</a> |
+    <a href="{% url 'logout' %}">Logout</a>
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>

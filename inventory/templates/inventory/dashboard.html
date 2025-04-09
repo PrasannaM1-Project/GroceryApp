@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | Grocery Inventory</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #dce35b, #45b649);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #fff;
+      margin-bottom: 10px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    p.subtitle {
+      font-size: 18px;
+      color: #f0f0f0;
+      margin-bottom: 30px;
+      animation: fadeInDown 1.5s ease-out;
+    }
+
+    .button-container {
+      animation: fadeInUp 2s ease-out;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      background-color: #2e7d32;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #1b5e20;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Grocery Inventory</h1>
+  <p class="subtitle">Smartly track your stock, manage orders, and never run out of essentials 🛒</p>
+
+  <div class="button-container">
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'register' %}" class="btn">Register</a>
+  </div>
+</body>
+</html>

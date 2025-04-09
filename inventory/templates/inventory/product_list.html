@@ -1,0 +1,119 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .products-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+
+    .products-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 15px;
+    }
+
+    .products-header h1 {
+        font-size: 2rem;
+        color: #343a40;
+        margin: 0;
+    }
+
+    .add-product-btn {
+        background-color: #0d6efd;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-product-btn:hover {
+        background-color: #0b5ed7;
+    }
+
+    .product-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .product-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        border-left: 5px solid #0d6efd;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .product-card:hover {
+        background-color: #e9ecef;
+    }
+
+    .product-info {
+        font-size: 1rem;
+        color: #495057;
+    }
+
+    .product-actions a {
+        margin-left: 15px;
+        text-decoration: none;
+        font-weight: 500;
+        color: #0d6efd;
+    }
+
+    .product-actions a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .product-card {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .product-actions {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<div class="products-container">
+    <div class="products-header">
+        <h1>Product Inventory</h1>
+        <a href="{% url 'product_create' %}" class="add-product-btn">+ Add Product</a>
+    </div>
+
+    <ul class="product-list">
+        {% for product in products %}
+        <li class="product-card">
+            <div class="product-info">
+                <strong>{{ product.name }}</strong> &nbsp;|&nbsp; Qty: {{ product.quantity }}
+            </div>
+            <div class="product-actions">
+                <a href="{% url 'product_update' product.id %}">Edit</a>
+                <a href="{% url 'product_delete' product.id %}">Delete</a>
+            </div>
+        </li>
+        {% empty %}
+        <li>No products available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

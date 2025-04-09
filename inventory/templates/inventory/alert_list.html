@@ -1,0 +1,68 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .alerts-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+
+    .alerts-header {
+        border-bottom: 2px solid #e9ecef;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+    }
+
+    .alerts-header h1 {
+        font-size: 2rem;
+        color: #dc3545;
+        margin: 0;
+    }
+
+    .alert-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .alert-list li {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .alert-list li strong {
+        color: #c82333;
+    }
+</style>
+
+<div class="alerts-container">
+    <div class="alerts-header">
+        <h1>Stock Alerts</h1>
+    </div>
+
+    <ul class="alert-list">
+    {% if alerts %}
+        {% for alert in alerts %}
+            <li><strong>{{ alert.name }}</strong> has only {{ alert.quantity }} left!</li>
+        {% endfor %}
+    {% else %}
+        <li style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;">
+            All products are sufficiently stocked!
+        </li>
+    {% endif %}
+    </ul>
+</div>
+{% endblock %}
