@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@aj-kpd2=5_6@1h7dcpa==ai&%v+2^^6ss4fwzs6$xun1&x9@%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['grocery-management-django.eu-west-1.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

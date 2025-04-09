@@ -9,7 +9,7 @@ phases:
   pre_build:
     commands:
       - python --version
-      - python manage.py collectstatic --noinput
+      #- python manage.py collectstatic --noinput
       - pylint grocery_inventory/**/*.py || true
       - echo "pre build stage completed"
       - echo "Django Test Cases Started"
