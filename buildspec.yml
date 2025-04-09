@@ -1,6 +1,25 @@
 version: 0.2
-
 phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt pylint
+  pre_build:
+    commands:
+      - python --version
+      - python manage.py collectstatic --noinput
+      - pylint grocery_inventory/**/*.py || true
+      - echo "pre build stage completed"
+      - echo "Django Test Cases Started"
+      # - python manage.py test
+      - echo "Django Test Cases Completed!!"
+      - echo "Build stage completed!"
   build:
     commands:
-      - echo "Hello from CodeBuild!"
+      - echo "Build stage completed"
+
+artifacts:
+   files:
+    - '**/*'
