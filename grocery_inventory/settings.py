@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from django.core.management.utils import get_random_secret_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@aj-kpd2=5_6@1h7dcpa==ai&%v+2^^6ss4fwzs6$xun1&x9@%'
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -87,7 +88,12 @@ DATABASES = {
         'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require',  # ✅ Force SSL, since AWS RDS requires it
-        }
+        },
+        'TEST': {
+            'NAME': 'test_grocery',  # Use a different name for the test database
+            'CHARSET': 'utf8mb4',  # Ensures utf8 support (optional but recommended)
+            'COLLATION': 'utf8mb4_unicode_ci',
+        }        
     }
 }
 
