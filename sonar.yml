@@ -1,0 +1,51 @@
+version: 0.2
+env:
+  secrets-manager:
+    LOGIN: x23409029:sonartoken
+    HOST: x23409029:HOST
+    Organization: x23409029:Organization
+    Project: x23409029:Project
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo "Start"
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - sudo yum clean all
+      - sudo yum install -y jq
+      - sudo yum remove -y java-11-openjdk
+      - sudo yum install -y java-17-amazon-corretto
+      - java -version
+      - export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+      - export PATH=$JAVA_HOME/bin:$PATH
+      - echo "JAVA_HOME is set to $JAVA_HOME"
+      - java -version
+
+
+  pre_build:
+    commands:
+      - echo "PRE-Build stage"
+      - python --version
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+      - unzip ./sonar-scanner-cli-5.0.1.3006-linux.zip
+      - export PATH=$PATH:./sonar-scanner-5.0.1.3006-linux/bin/
+      - sonar-scanner --version
+      - echo "pre build stage completed"
+
+
+  build:
+    commands:
+      - echo "Build Stage"
+      - echo "Sonar Cloud Started"
+      - sonar-scanner -Dsonar.login=$LOGIN -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=$Project -Dsonar.organization=$Organization -Dsonar.coverage.exclusions=**/* || true
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - cat result.json
+      - echo "Build stage completed!"
+
+artifacts:
+  files:
+    - '**/*'

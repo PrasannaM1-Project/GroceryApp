@@ -13,7 +13,7 @@ phases:
       - pylint grocery_inventory/**/*.py || true
       - echo "pre build stage completed"
       - echo "Django Test Cases Started"
-      # - python manage.py test
+      - python manage.py test
       - echo "Django Test Cases Completed!!"
       - echo "Build stage completed!"
   build:
