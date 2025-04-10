@@ -91,8 +91,6 @@ DATABASES = {
         },
         'TEST': {
             'NAME': 'test_grocery',  # Use a different name for the test database
-            'CHARSET': 'utf8mb4',  # Ensures utf8 support (optional but recommended)
-            'COLLATION': 'utf8mb4_unicode_ci',
         }        
     }
 }
